@@ -63,7 +63,7 @@ set ttimeout
 set ttimeoutlen=1
 
 " Or use vividchalk
-colorscheme railscasts
+colorscheme default
 
 set list listchars=tab:\ \ ,trail:·
 highlight ExtraWhitespace ctermbg=196 guibg=#FF1100 ctermfg=white guifg=white
