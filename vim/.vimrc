@@ -213,3 +213,7 @@ function! DeleteFile()
 endfunction
 map <Leader>d :call DeleteFile()<cr>
 
+""
+" ctrlp
+""
+set runtimepath^=~/.vim/bundle/ctrlp.vim
