@@ -49,6 +49,7 @@ Plugin 'tpope/vim-repeat'
 
 " Colour Scheme
 " Plugin 'altercation/vim-colors-solarized'
+Plugin 'flazz/vim-colorschemes'
 
 " Syntax checking
 Plugin 'vim-syntastic/syntastic'
@@ -58,6 +59,9 @@ Plugin 'Raimondi/delimitMate'
 
 " Buffer navigation
 Plugin 'jeetsukumaran/vim-buffergator'
+
+" NerdTree
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -76,23 +80,103 @@ filetype plugin indent on    " required
 
 " None vundle config:
 
-syntax enable " Turn on syntax highlighting
+" enable 256 color support
+" set t_Co=256
+" if (has("termguicolors"))
+ " set termguicolors
+" endif
 " set background=dark
 " colorscheme solarized
+colorscheme molokai
+
+syntax enable " Turn on syntax highlighting
 set hidden " Leave hidden buffers open
 set history=100 "by default Vim saves your last 8 commands.  We can handle more
 set number
 
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+" SYNTASTIC
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" eslint should be installed local to the project along with
+" any plugins that are needed
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
+
+" syntastic
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 " Airline
 
 let g:airline#extensions#tabline#enabled = 1
+
+" NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <silent> <C-n> :NERDTreeToggle<CR>
+
+" switch to previously opened buffer and close the one we just
+" switched away from (does the equivelant of :bd but without destroying
+" my split window)
+nmap <leader>bd :b#<bar>bd#<CR>
+
+" closes all buffers that aren't currently visible in
+" window/split/tab
+nnoremap <leader>bc :call CloseAllHiddenBuffers()<CR>
+
+func! s:buf_compare(b1, b2) abort
+  let b1_visible = -1 == index(tabpagebuflist(), a:b1)
+  let b2_visible = -1 == index(tabpagebuflist(), a:b2)
+  "prefer loaded and NON-visible buffers
+  if bufloaded(a:b1)
+    if bufloaded(a:b2)
+      return b2_visible ? !b1_visible : -1
+    endif
+    return 0
+  endif
+  return !bufloaded(a:b2) ? 0 : 1
+endf
+
+function! CloseAllHiddenBuffers()
+  " list of *all* buffer numbers including hidden ones
+  let l:buffers = filter(range(1, bufnr('$')),
+              \ 'buflisted(v:val)
+              \  && ("" ==# getbufvar(v:val, "&buftype") || "help" ==# getbufvar(v:val, "&buftype"))
+              \ ')
+  call sort(l:buffers, '<sid>buf_compare')
+  " what tab page are we in?
+  let l:currentTab = tabpagenr()
+  try
+    " go through all tab pages
+    let l:tab = 0
+    while l:tab < tabpagenr('$')
+      let l:tab += 1
+
+      " go through all windows
+      let l:win = 0
+      while l:win < winnr('$')
+        let l:win += 1
+        " whatever buffer is in this window in this tab, remove it from
+        " l:buffers list
+        let l:thisbuf = winbufnr(l:win)
+        call remove(l:buffers, index(l:buffers, l:thisbuf))
+      endwhile
+    endwhile
+
+    " if there are any buffers left, delete them
+    if len(l:buffers)
+      execute 'bwipeout' join(l:buffers)
+    endif
+  finally
+    " go back to our original tab page
+    execute 'tabnext' l:currentTab
+  endtry
+endfunction
