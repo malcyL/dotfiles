@@ -125,15 +125,8 @@ let g:airline#extensions#tabline#enabled = 1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <silent> <C-n> :NERDTreeToggle<CR>
-
-" map <silent> <C-Right> :bnext<CR>
-" map <silent> <C-Left> :bprevious<CR>
-" map <silent> <C-.> :bnext<CR>
-" map <silent> <C-,> :bprevious<CR>
-" nnoremap <leader>. :bn<CR>  " next buffer
-" nnoremap <leader>, :bp<CR>  " previous buffer
-:map <CTRL-V><CTRL-PAGEUP> :bprevious<CR>
-:map <CTRL-V><CTRL-PAGEDOWN> :bnext<CR>
+map <silent> <C-PageDown> :bnext<CR>
+map <silent> <C-PageUp> :bprevious<CR>
 
 " switch to previously opened buffer and close the one we just
 " switched away from (does the equivelant of :bd but without destroying
