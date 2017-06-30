@@ -93,6 +93,9 @@ syntax enable " Turn on syntax highlighting
 set hidden " Leave hidden buffers open
 set history=100 "by default Vim saves your last 8 commands.  We can handle more
 set number
+set clipboard=unnamedplus
+:au FocusLost * silent! wa
+:set autowriteall
 
 " SYNTASTIC
 " let g:syntastic_always_populate_loc_list = 1
@@ -122,6 +125,15 @@ let g:airline#extensions#tabline#enabled = 1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <silent> <C-n> :NERDTreeToggle<CR>
+
+" map <silent> <C-Right> :bnext<CR>
+" map <silent> <C-Left> :bprevious<CR>
+" map <silent> <C-.> :bnext<CR>
+" map <silent> <C-,> :bprevious<CR>
+" nnoremap <leader>. :bn<CR>  " next buffer
+" nnoremap <leader>, :bp<CR>  " previous buffer
+:map <CTRL-V><CTRL-PAGEUP> :bprevious<CR>
+:map <CTRL-V><CTRL-PAGEDOWN> :bnext<CR>
 
 " switch to previously opened buffer and close the one we just
 " switched away from (does the equivelant of :bd but without destroying
