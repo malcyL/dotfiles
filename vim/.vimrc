@@ -63,6 +63,9 @@ Plugin 'jeetsukumaran/vim-buffergator'
 " NerdTree
 Plugin 'scrooloose/nerdtree'
 
+" Surround Vim
+Plugin 'tpope/vim-surround'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -96,6 +99,19 @@ set number
 set clipboard=unnamedplus
 :au FocusLost * silent! wa
 :set autowriteall
+
+" default ident to 2 spaces
+set expandtab
+set smarttab
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+
+" javascript 2 spaces
+autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
+
+" php 4 spaces
+autocmd Filetype php setlocal ts=4 sw=4 sts=0 expandtab
 
 " SYNTASTIC
 " let g:syntastic_always_populate_loc_list = 1
@@ -136,6 +152,9 @@ nmap <leader>bd :b#<bar>bd#<CR>
 " closes all buffers that aren't currently visible in
 " window/split/tab
 nnoremap <leader>bc :call CloseAllHiddenBuffers()<CR>
+
+" Use f2 to toggle paste mode
+set pastetoggle=<F2>
 
 func! s:buf_compare(b1, b2) abort
   let b1_visible = -1 == index(tabpagebuflist(), a:b1)
