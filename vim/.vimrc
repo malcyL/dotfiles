@@ -66,6 +66,12 @@ Plugin 'scrooloose/nerdtree'
 " Surround Vim
 Plugin 'tpope/vim-surround'
 
+" Commenting out Code
+Plugin 'scrooloose/nerdcommenter'
+
+"Rails
+Plugin 'tpope/vim-rails.git'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
