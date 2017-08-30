@@ -14,3 +14,10 @@ awslookup() {
   eval $cmd
 }
 alias awslookup=awslookup
+
+alias dockerStopAll="docker stop \$(docker ps -a -q)";
+alias dockerRmAll="docker rm \$(docker ps -a -q)";
+alias dockerRmVolumes="docker volume rm \`docker volume ls -q -f dangling=true\`"
+alias dockerRmConsul="sudo rm -rf /consul/*"
+alias dockerRmDanglingImages="docker rmi \$(docker images -aq --filter dangling=true)"
+alias dockerCleanUp="dockerRmConsul; dockerStopAll; dockerRmAll; dockerRmVolumes; dockerRmDanglingImages"
