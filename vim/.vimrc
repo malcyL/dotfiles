@@ -147,6 +147,7 @@ let g:airline#extensions#tabline#enabled = 1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <silent> <C-n> :NERDTreeToggle<CR>
+map <silent> <C-f> :NERDTreeFind<CR>
 map <silent> <C-PageDown> :bnext<CR>
 map <silent> <C-PageUp> :bprevious<CR>
 
