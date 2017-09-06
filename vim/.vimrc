@@ -75,6 +75,9 @@ Plugin 'tpope/vim-rails.git'
 " Search Highlighting
 Plugin 'inside/vim-search-pulse'
 
+" Startify
+Plugin 'mhinz/vim-startify'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -148,7 +151,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <silent> <C-n> :NERDTreeToggle<CR>
 map <silent> <C-f> :NERDTreeFind<CR>
 map <silent> <C-PageDown> :bnext<CR>
@@ -165,6 +168,23 @@ nnoremap <leader>bc :call CloseAllHiddenBuffers()<CR>
 
 " Use f2 to toggle paste mode
 set pastetoggle=<F2>
+
+" STARTIFY
+let g:startify_custom_header = [
+  \ '                                 .__                .__   ',
+  \ '                    _____ _____  |  |   ____ ___.__.|  |  ',
+  \ '                   /     \\__  \ |  | _/ ___<   |  ||  |  ',
+  \ '                  |  Y Y  \/ __ \|  |_\  \___\___  ||  |__',
+  \ '                  |__|_|  (____  /____/\___  > ____||____/',
+  \ '                        \/     \/          \/\/           ',
+  \ ]
+let g:startify_files_number = 5
+let g:startify_session_autoload = 1
+let g:startify_session_persistence = 1
+let g:startify_skiplist = [
+  \ 'COMMIT_EDITMSG',
+  \ '\.git/*',
+  \ ]
 
 func! s:buf_compare(b1, b2) abort
   let b1_visible = -1 == index(tabpagebuflist(), a:b1)
