@@ -1,6 +1,9 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" save information about files I open
+set viminfo='100,n$HOME/.vim/files/info/viminfo
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -52,7 +55,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'flazz/vim-colorschemes'
 
 " Syntax checking
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 
 " Inserting closing brackets etc
 Plugin 'Raimondi/delimitMate'
@@ -156,6 +160,7 @@ map <silent> <C-n> :NERDTreeToggle<CR>
 map <silent> <C-f> :NERDTreeFind<CR>
 map <silent> <C-PageDown> :bnext<CR>
 map <silent> <C-PageUp> :bprevious<CR>
+map <silent> <C-c> :cclose<CR>
 
 " switch to previously opened buffer and close the one we just
 " switched away from (does the equivelant of :bd but without destroying
