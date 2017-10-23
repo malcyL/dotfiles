@@ -149,6 +149,11 @@ let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
 
+" ALE
+let g:ale_pattern_options = {
+\   '.*\.test\.js$': {'ale_enabled': 0},
+\}
+
 " Airline
 
 let g:airline#extensions#tabline#enabled = 1
