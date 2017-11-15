@@ -82,6 +82,12 @@ Plugin 'inside/vim-search-pulse'
 " Startify
 Plugin 'mhinz/vim-startify'
 
+" Vertical indent lines
+Plugin 'yggdroot/indentline'
+
+" Sublime like multiple cursors
+Plugin 'terryma/vim-multiple-cursors'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -124,7 +130,7 @@ set tabstop=2
 set softtabstop=2
 
 " javascript 2 spaces
-autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
 
 " php 4 spaces
 autocmd Filetype php setlocal ts=4 sw=4 sts=0 expandtab
@@ -155,8 +161,17 @@ let g:ale_pattern_options = {
 \}
 
 " Airline
-
 let g:airline#extensions#tabline#enabled = 1
+
+" Indentline
+let g:indentLine_conceallevel = 1
+
+" Multi Cursor mapping
+let g:multi_cursor_next_key='<C-]>'
+let g:multi_cursor_prev_key='<C-[>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+let g:multi_cursor_exit_from_insert_mode = 0
 
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
