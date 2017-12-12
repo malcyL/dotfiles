@@ -32,16 +32,17 @@ Plugin 'VundleVim/Vundle.vim'
 
 " CtrlP
 Plugin 'kien/ctrlp.vim'
+
 " Ack
 Plugin 'mileszs/ack.vim'
+
 " Ag
 Plugin 'rking/ag.vim'
-" Airline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+
+" LightLine
+Plugin 'itchyny/lightline.vim'
 
 " Git Gutter
-" Plugin 'jisaacks/GitGutter'
 Plugin 'airblade/vim-gitgutter'
 
 " Comment things out with commentary
@@ -51,21 +52,19 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
 
 " Colour Scheme
-" Plugin 'altercation/vim-colors-solarized'
 Plugin 'flazz/vim-colorschemes'
 
 " Syntax checking
-" Plugin 'vim-syntastic/syntastic'
 Plugin 'w0rp/ale'
 
 " Inserting closing brackets etc
 Plugin 'Raimondi/delimitMate'
 
-" Buffer navigation
-Plugin 'jeetsukumaran/vim-buffergator'
-
 " NerdTree
 Plugin 'scrooloose/nerdtree'
+
+" NerdTree Git
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Surround Vim
 Plugin 'tpope/vim-surround'
@@ -73,20 +72,11 @@ Plugin 'tpope/vim-surround'
 " Commenting out Code
 Plugin 'scrooloose/nerdcommenter'
 
-"Rails
-Plugin 'tpope/vim-rails.git'
-
 " Search Highlighting
 Plugin 'inside/vim-search-pulse'
 
-" Startify
-Plugin 'mhinz/vim-startify'
-
 " Vertical indent lines
 Plugin 'yggdroot/indentline'
-
-" Sublime like multiple cursors
-Plugin 'terryma/vim-multiple-cursors'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -105,22 +95,24 @@ filetype plugin indent on    " required
 
 " None vundle config:
 
-" enable 256 color support
-" set t_Co=256
-" if (has("termguicolors"))
- " set termguicolors
-" endif
-" set background=dark
-" colorscheme solarized
 colorscheme molokai
 
 syntax enable " Turn on syntax highlighting
+
 set hidden " Leave hidden buffers open
 set history=100 "by default Vim saves your last 8 commands.  We can handle more
 set number
 set clipboard=unnamedplus
 :au FocusLost * silent! wa
 :set autowriteall
+" Use f2 to toggle paste mode
+set pastetoggle=<F2>
+" Automatically save file
+autocmd FocusLost * silent! wa 
+" Keep 5 lines below and above the cursor
+set scrolloff=5 
+
+command FormatJSON %!python -m json.tool
 
 " default ident to 2 spaces
 set expandtab
@@ -135,81 +127,92 @@ autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
 " php 4 spaces
 autocmd Filetype php setlocal ts=4 sw=4 sts=0 expandtab
 
-" SYNTASTIC
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" eslint should be installed local to the project along with
-" any plugins that are needed
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
-
-" syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
+" CtrlP
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|node_modules',
+  \ }
 
 " ALE
 let g:ale_pattern_options = {
 \   '.*\.test\.js$': {'ale_enabled': 0},
 \}
+let g:ale_fixers = { 'javascript': ['eslint'], 'go': ['gofmt'] }
 
-" Airline
-let g:airline#extensions#tabline#enabled = 1
+" LightLine
+set laststatus=2
+
+let g:lightline = {
+\ 'colorscheme': 'wombat',
+\ 'active': {
+\   'left': [['mode', 'paste'], ['filename', 'modified']],
+\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\ },
+\ 'component_expand': {
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'linter_ok': 'LightlineLinterOK'
+\ },
+\ 'component_type': {
+\   'readonly': 'error',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error'
+\ },
+\ }
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓ ' : ''
+endfunction
+
+" Update and show lightline but only if it's visible (e.g., not in Goyo)
+autocmd User ALELint call s:MaybeUpdateLightline()
+function! s:MaybeUpdateLightline()
+  if exists('#lightline')
+    call lightline#update()
+  end
+endfunction
 
 " Indentline
 let g:indentLine_conceallevel = 1
 
-" Multi Cursor mapping
-let g:multi_cursor_next_key='<C-]>'
-let g:multi_cursor_prev_key='<C-[>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-let g:multi_cursor_exit_from_insert_mode = 0
-
 " NERDTree
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+" Following two lines open NerdTree on startup if no file specified
 autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | wincmd p | ene | endif
+
+" Key Mappings
+
 map <silent> <C-n> :NERDTreeToggle<CR>
 map <silent> <C-f> :NERDTreeFind<CR>
 map <silent> <C-PageDown> :bnext<CR>
 map <silent> <C-PageUp> :bprevious<CR>
 map <silent> <C-c> :cclose<CR>
+map <silent> <C-d> :b#<bar>bd#<CR>
+map <silent> <C-b> :CtrlPBuffer<CR>
 
-" switch to previously opened buffer and close the one we just
-" switched away from (does the equivelant of :bd but without destroying
-" my split window)
-nmap <leader>bd :b#<bar>bd#<CR>
+" Nice mapping for switching buffers.
+" Disable while trying :CtrlPBuffer
+"nmap <leader>b :buffers<CR>:buf 
 
 " closes all buffers that aren't currently visible in
 " window/split/tab
 nnoremap <leader>bc :call CloseAllHiddenBuffers()<CR>
-
-" Use f2 to toggle paste mode
-set pastetoggle=<F2>
-
-" STARTIFY
-let g:startify_custom_header = [
-  \ '                                 .__                .__   ',
-  \ '                    _____ _____  |  |   ____ ___.__.|  |  ',
-  \ '                   /     \\__  \ |  | _/ ___<   |  ||  |  ',
-  \ '                  |  Y Y  \/ __ \|  |_\  \___\___  ||  |__',
-  \ '                  |__|_|  (____  /____/\___  > ____||____/',
-  \ '                        \/     \/          \/\/           ',
-  \ ]
-let g:startify_files_number = 5
-let g:startify_session_autoload = 1
-let g:startify_session_persistence = 1
-let g:startify_skiplist = [
-  \ 'COMMIT_EDITMSG',
-  \ '\.git/*',
-  \ ]
 
 func! s:buf_compare(b1, b2) abort
   let b1_visible = -1 == index(tabpagebuflist(), a:b1)
