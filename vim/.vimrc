@@ -203,8 +203,9 @@ map <silent> <C-f> :NERDTreeFind<CR>
 map <silent> <C-PageDown> :bnext<CR>
 map <silent> <C-PageUp> :bprevious<CR>
 map <silent> <C-c> :cclose<CR>
-map <silent> <C-d> :b#<bar>bd#<CR>
+map <silent> <C-q> :b#<bar>bd#<CR>
 map <silent> <C-b> :CtrlPBuffer<CR>
+map <silent> <C-i> :IndentLinesToggle<CR>:set invnumber<CR>
 
 " Nice mapping for switching buffers.
 " Disable while trying :CtrlPBuffer
