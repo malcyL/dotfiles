@@ -78,6 +78,12 @@ Plugin 'inside/vim-search-pulse'
 " Vertical indent lines
 Plugin 'yggdroot/indentline'
 
+" Display buffers in status bar
+" Plugin 'bling/vim-bufferline'
+
+" Close all other buffers
+Plugin 'moll/vim-bbye'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -121,8 +127,8 @@ set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 
-" javascript 2 spaces
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+" javascript 4 spaces
+" autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
 
 " php 4 spaces
 autocmd Filetype php setlocal ts=4 sw=4 sts=0 expandtab
@@ -144,7 +150,7 @@ set laststatus=2
 let g:lightline = {
 \ 'colorscheme': 'wombat',
 \ 'active': {
-\   'left': [['mode', 'paste'], ['filename', 'modified']],
+\   'left': [['mode', 'paste'], ['relativepath', 'modified']],
 \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
 \ },
 \ 'component_expand': {
@@ -189,14 +195,16 @@ endfunction
 let g:indentLine_conceallevel = 1
 
 " NERDTree
-let NERDTreeQuitOnOpen = 1
+let NERDTreeQuitOnOpen = 0
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 " Following two lines open NerdTree on startup if no file specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | wincmd p | ene | endif
 
+"
 " Key Mappings
+"
 
 map <silent> <C-n> :NERDTreeToggle<CR>
 map <silent> <C-f> :NERDTreeFind<CR>
@@ -209,57 +217,60 @@ map <silent> <C-i> :IndentLinesToggle<CR>:set invnumber<CR>
 
 " Nice mapping for switching buffers.
 " Disable while trying :CtrlPBuffer
-"nmap <leader>b :buffers<CR>:buf 
+nmap <leader>b :buffers<CR>:buf 
 
 " closes all buffers that aren't currently visible in
 " window/split/tab
-nnoremap <leader>bc :call CloseAllHiddenBuffers()<CR>
+" nnoremap <leader>bc :call CloseAllHiddenBuffers()<CR>
 
-func! s:buf_compare(b1, b2) abort
-  let b1_visible = -1 == index(tabpagebuflist(), a:b1)
-  let b2_visible = -1 == index(tabpagebuflist(), a:b2)
-  "prefer loaded and NON-visible buffers
-  if bufloaded(a:b1)
-    if bufloaded(a:b2)
-      return b2_visible ? !b1_visible : -1
-    endif
-    return 0
-  endif
-  return !bufloaded(a:b2) ? 0 : 1
-endf
+" nmap <leader>b :buf 
+nnoremap <Leader>q :Bdelete<CR>
 
-function! CloseAllHiddenBuffers()
-  " list of *all* buffer numbers including hidden ones
-  let l:buffers = filter(range(1, bufnr('$')),
-              \ 'buflisted(v:val)
-              \  && ("" ==# getbufvar(v:val, "&buftype") || "help" ==# getbufvar(v:val, "&buftype"))
-              \ ')
-  call sort(l:buffers, '<sid>buf_compare')
-  " what tab page are we in?
-  let l:currentTab = tabpagenr()
-  try
-    " go through all tab pages
-    let l:tab = 0
-    while l:tab < tabpagenr('$')
-      let l:tab += 1
+"func! s:buf_compare(b1, b2) abort
+"  let b1_visible = -1 == index(tabpagebuflist(), a:b1)
+"  let b2_visible = -1 == index(tabpagebuflist(), a:b2)
+"  "prefer loaded and NON-visible buffers
+"  if bufloaded(a:b1)
+"    if bufloaded(a:b2)
+"      return b2_visible ? !b1_visible : -1
+"    endif
+"    return 0
+"  endif
+"  return !bufloaded(a:b2) ? 0 : 1
+"endf
 
-      " go through all windows
-      let l:win = 0
-      while l:win < winnr('$')
-        let l:win += 1
-        " whatever buffer is in this window in this tab, remove it from
-        " l:buffers list
-        let l:thisbuf = winbufnr(l:win)
-        call remove(l:buffers, index(l:buffers, l:thisbuf))
-      endwhile
-    endwhile
+"function! CloseAllHiddenBuffers()
+"  " list of *all* buffer numbers including hidden ones
+"  let l:buffers = filter(range(1, bufnr('$')),
+"              \ 'buflisted(v:val)
+"              \  && ("" ==# getbufvar(v:val, "&buftype") || "help" ==# getbufvar(v:val, "&buftype"))
+"              \ ')
+"  call sort(l:buffers, '<sid>buf_compare')
+"  " what tab page are we in?
+"  let l:currentTab = tabpagenr()
+"  try
+"    " go through all tab pages
+"    let l:tab = 0
+"    while l:tab < tabpagenr('$')
+"      let l:tab += 1
 
-    " if there are any buffers left, delete them
-    if len(l:buffers)
-      execute 'bwipeout' join(l:buffers)
-    endif
-  finally
-    " go back to our original tab page
-    execute 'tabnext' l:currentTab
-  endtry
-endfunction
+"      " go through all windows
+"      let l:win = 0
+"      while l:win < winnr('$')
+"        let l:win += 1
+"        " whatever buffer is in this window in this tab, remove it from
+"        " l:buffers list
+"        let l:thisbuf = winbufnr(l:win)
+"        call remove(l:buffers, index(l:buffers, l:thisbuf))
+"      endwhile
+"    endwhile
+
+"    " if there are any buffers left, delete them
+"    if len(l:buffers)
+"      execute 'bwipeout' join(l:buffers)
+"    endif
+"  finally
+"    " go back to our original tab page
+"    execute 'tabnext' l:currentTab
+"  endtry
+"endfunction
