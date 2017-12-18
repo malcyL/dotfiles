@@ -81,8 +81,11 @@ Plugin 'yggdroot/indentline'
 " Display buffers in status bar
 " Plugin 'bling/vim-bufferline'
 
-" Close all other buffers
+" Close buffers without destroying windows
 Plugin 'moll/vim-bbye'
+
+" Close all other buffers
+Plugin 'schickling/vim-bufonly'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -211,7 +214,7 @@ map <silent> <C-f> :NERDTreeFind<CR>
 map <silent> <C-PageDown> :bnext<CR>
 map <silent> <C-PageUp> :bprevious<CR>
 map <silent> <C-c> :cclose<CR>
-map <silent> <C-q> :b#<bar>bd#<CR>
+" map <silent> <C-q> :b#<bar>bd#<CR>
 map <silent> <C-b> :CtrlPBuffer<CR>
 map <silent> <C-i> :IndentLinesToggle<CR>:set invnumber<CR>
 
@@ -225,6 +228,8 @@ nmap <leader>b :buffers<CR>:buf
 
 " nmap <leader>b :buf 
 nnoremap <Leader>q :Bdelete<CR>
+
+nnoremap <leader>xa :BufOnly<CR>
 
 "func! s:buf_compare(b1, b2) abort
 "  let b1_visible = -1 == index(tabpagebuflist(), a:b1)
