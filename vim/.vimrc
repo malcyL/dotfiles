@@ -87,6 +87,16 @@ Plugin 'moll/vim-bbye'
 " Close all other buffers
 Plugin 'schickling/vim-bufonly'
 
+" Use tag file to display current file structure
+Plugin 'majutsushi/tagbar'
+
+" Auto update tags
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+
+" Coloured brackets
+Plugin 'luochen1990/rainbow'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -146,6 +156,32 @@ let g:ale_pattern_options = {
 \   '.*\.test\.js$': {'ale_enabled': 0},
 \}
 let g:ale_fixers = { 'javascript': ['eslint'], 'go': ['gofmt'] }
+
+" Coloured Brackets
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+
+let g:rainbow_conf = {
+\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\	'ctermfgs': ['darkblue', 'darkyellow', 'darkcyan', 'darkmagenta'],
+\	'operators': '_,_',
+\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\	'separately': {
+\		'*': {},
+\		'tex': {
+\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+\		},
+\		'lisp': {
+\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+\		},
+\		'vim': {
+\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+\		},
+\		'html': {
+\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\		},
+\		'css': 0,
+\	}
+\}
 
 " LightLine
 set laststatus=2
@@ -214,22 +250,15 @@ map <silent> <C-f> :NERDTreeFind<CR>
 map <silent> <C-PageDown> :bnext<CR>
 map <silent> <C-PageUp> :bprevious<CR>
 map <silent> <C-c> :cclose<CR>
-" map <silent> <C-q> :b#<bar>bd#<CR>
+map <silent> <C-q> :Bdelete<CR>
 map <silent> <C-b> :CtrlPBuffer<CR>
 map <silent> <C-i> :IndentLinesToggle<CR>:set invnumber<CR>
 
-" Nice mapping for switching buffers.
-" Disable while trying :CtrlPBuffer
-nmap <leader>b :buffers<CR>:buf 
-
-" closes all buffers that aren't currently visible in
-" window/split/tab
-" nnoremap <leader>bc :call CloseAllHiddenBuffers()<CR>
-
-" nmap <leader>b :buf 
-nnoremap <Leader>q :Bdelete<CR>
-
+nmap <leader>b :CtrlPBuffer<CR>
+nmap <leader>c :cclose<CR>
+nmap <leader>q :Bdelete<CR>
 nnoremap <leader>xa :BufOnly<CR>
+nmap <F8> :TagbarToggle<CR>
 
 "func! s:buf_compare(b1, b2) abort
 "  let b1_visible = -1 == index(tabpagebuflist(), a:b1)
