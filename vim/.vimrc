@@ -141,7 +141,7 @@ set tabstop=2
 set softtabstop=2
 
 " javascript 4 spaces
-" autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
 
 " php 4 spaces
 autocmd Filetype php setlocal ts=4 sw=4 sts=0 expandtab
@@ -245,20 +245,24 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | winc
 " Key Mappings
 "
 
-map <silent> <C-n> :NERDTreeToggle<CR>
-map <silent> <C-f> :NERDTreeFind<CR>
-map <silent> <C-PageDown> :bnext<CR>
-map <silent> <C-PageUp> :bprevious<CR>
-map <silent> <C-c> :cclose<CR>
-map <silent> <C-q> :Bdelete<CR>
-map <silent> <C-b> :CtrlPBuffer<CR>
-map <silent> <C-i> :IndentLinesToggle<CR>:set invnumber<CR>
+" map <silent> <C-n> :NERDTreeToggle<CR>
+" map <silent> <C-f> :NERDTreeFind<CR>
+" map <silent> <C-PageDown> :bnext<CR>
+" map <silent> <C-PageUp> :bprevious<CR>
+" map <silent> <C-c> :cclose<CR>
+" map <silent> <C-q> :Bdelete<CR>
+" map <silent> <C-b> :CtrlPBuffer<CR>
+" map <silent> <C-i> :IndentLinesToggle<CR>:set invnumber<CR>
 
+nmap <leader>n :NERDTreeToggle<CR>
+nmap <leader>f :NERDTreeFind<CR>
+nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>c :cclose<CR>
 nmap <leader>q :Bdelete<CR>
 nnoremap <leader>xa :BufOnly<CR>
 nmap <F8> :TagbarToggle<CR>
+nmap <leader>i :IndentLinesToggle<CR>:set invnumber<CR>
 
 "func! s:buf_compare(b1, b2) abort
 "  let b1_visible = -1 == index(tabpagebuflist(), a:b1)
