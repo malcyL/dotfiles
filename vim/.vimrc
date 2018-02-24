@@ -254,6 +254,9 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | winc
 " map <silent> <C-b> :CtrlPBuffer<CR>
 " map <silent> <C-i> :IndentLinesToggle<CR>:set invnumber<CR>
 
+" Map Ctrl-A to Ctrl-W so tmux and vim pane changes match
+map <C-A> <C-W>
+
 nmap <leader>n :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>p :CtrlP<CR>
