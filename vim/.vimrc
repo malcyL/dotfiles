@@ -266,6 +266,7 @@ nmap <leader>q :Bdelete<CR>
 nnoremap <leader>xa :BufOnly<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <leader>i :IndentLinesToggle<CR>:set invnumber<CR>
+nnoremap <bs> <c-^>
 
 "func! s:buf_compare(b1, b2) abort
 "  let b1_visible = -1 == index(tabpagebuflist(), a:b1)
