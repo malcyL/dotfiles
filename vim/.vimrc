@@ -76,10 +76,10 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'inside/vim-search-pulse'
 
 " Vertical indent lines
-Plugin 'yggdroot/indentline'
+" Plugin 'yggdroot/indentline'
 
 " Display buffers in status bar
-" Plugin 'bling/vim-bufferline'
+Plugin 'bling/vim-bufferline'
 
 " Close buffers without destroying windows
 Plugin 'moll/vim-bbye'
@@ -91,8 +91,8 @@ Plugin 'schickling/vim-bufonly'
 Plugin 'majutsushi/tagbar'
 
 " Auto update tags
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
+" Plugin 'xolox/vim-misc'
+" Plugin 'xolox/vim-easytags'
 
 " Coloured brackets
 Plugin 'luochen1990/rainbow'
@@ -245,16 +245,6 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | winc
 " Key Mappings
 "
 
-" map <silent> <C-n> :NERDTreeToggle<CR>
-" map <silent> <C-f> :NERDTreeFind<CR>
-" map <silent> <C-PageDown> :bnext<CR>
-" map <silent> <C-PageUp> :bprevious<CR>
-" map <silent> <C-c> :cclose<CR>
-" map <silent> <C-q> :Bdelete<CR>
-" map <silent> <C-b> :CtrlPBuffer<CR>
-" map <silent> <C-i> :IndentLinesToggle<CR>:set invnumber<CR>
-
-" Map Ctrl-A to Ctrl-W so tmux and vim pane changes match
 map <C-A> <C-W>
 
 nmap <leader>n :NERDTreeToggle<CR>
@@ -268,51 +258,3 @@ nmap <F8> :TagbarToggle<CR>
 nmap <leader>i :IndentLinesToggle<CR>:set invnumber<CR>
 nnoremap <bs> <c-^>
 
-"func! s:buf_compare(b1, b2) abort
-"  let b1_visible = -1 == index(tabpagebuflist(), a:b1)
-"  let b2_visible = -1 == index(tabpagebuflist(), a:b2)
-"  "prefer loaded and NON-visible buffers
-"  if bufloaded(a:b1)
-"    if bufloaded(a:b2)
-"      return b2_visible ? !b1_visible : -1
-"    endif
-"    return 0
-"  endif
-"  return !bufloaded(a:b2) ? 0 : 1
-"endf
-
-"function! CloseAllHiddenBuffers()
-"  " list of *all* buffer numbers including hidden ones
-"  let l:buffers = filter(range(1, bufnr('$')),
-"              \ 'buflisted(v:val)
-"              \  && ("" ==# getbufvar(v:val, "&buftype") || "help" ==# getbufvar(v:val, "&buftype"))
-"              \ ')
-"  call sort(l:buffers, '<sid>buf_compare')
-"  " what tab page are we in?
-"  let l:currentTab = tabpagenr()
-"  try
-"    " go through all tab pages
-"    let l:tab = 0
-"    while l:tab < tabpagenr('$')
-"      let l:tab += 1
-
-"      " go through all windows
-"      let l:win = 0
-"      while l:win < winnr('$')
-"        let l:win += 1
-"        " whatever buffer is in this window in this tab, remove it from
-"        " l:buffers list
-"        let l:thisbuf = winbufnr(l:win)
-"        call remove(l:buffers, index(l:buffers, l:thisbuf))
-"      endwhile
-"    endwhile
-
-"    " if there are any buffers left, delete them
-"    if len(l:buffers)
-"      execute 'bwipeout' join(l:buffers)
-"    endif
-"  finally
-"    " go back to our original tab page
-"    execute 'tabnext' l:currentTab
-"  endtry
-"endfunction
