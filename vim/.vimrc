@@ -100,6 +100,9 @@ Plugin 'luochen1990/rainbow'
 " Easy motion
 Plugin 'easymotion/vim-easymotion'
 
+" Prettier - javascript code formatter
+Plugin 'prettier/vim-prettier'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
