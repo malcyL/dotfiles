@@ -97,6 +97,9 @@ Plugin 'majutsushi/tagbar'
 " Coloured brackets
 Plugin 'luochen1990/rainbow'
 
+" Easy motion
+Plugin 'easymotion/vim-easymotion'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -120,7 +123,7 @@ syntax enable " Turn on syntax highlighting
 
 set hidden " Leave hidden buffers open
 set history=100 "by default Vim saves your last 8 commands.  We can handle more
-set number
+set number relativenumber
 set clipboard=unnamedplus
 :au FocusLost * silent! wa
 :set autowriteall
@@ -242,6 +245,27 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | wincmd p | ene | endif
 
 "
+" Easy Motion
+"
+
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+" nmap s <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+"
 " Key Mappings
 "
 
@@ -258,3 +282,6 @@ nmap <F8> :TagbarToggle<CR>
 nmap <leader>i :IndentLinesToggle<CR>:set invnumber<CR>
 nnoremap <bs> <c-^>
 
+" Move visual selection
+vnoremap J :m '>+1<CR>gv=gv'
+vnoremap K :m '<-2<CR>gv=gv'
