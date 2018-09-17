@@ -88,7 +88,7 @@ Plugin 'moll/vim-bbye'
 Plugin 'schickling/vim-bufonly'
 
 " Use tag file to display current file structure
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 
 " Auto update tags
 " Plugin 'xolox/vim-misc'
@@ -146,8 +146,8 @@ set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 
-" javascript 4 spaces
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+" javascript 2 spaces
+autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
 
 " php 4 spaces
 autocmd Filetype php setlocal ts=4 sw=4 sts=0 expandtab
@@ -286,5 +286,5 @@ nmap <leader>i :IndentLinesToggle<CR>:set invnumber<CR>
 nnoremap <bs> <c-^>
 
 " Move visual selection
-vnoremap J :m '>+1<CR>gv=gv'
-vnoremap K :m '<-2<CR>gv=gv'
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
