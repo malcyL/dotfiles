@@ -10,10 +10,10 @@ set viminfo='100,n$HOME/.vim/files/info/viminfo
 call plug#begin('~/.vim/plugged')
 
 " CtrlP
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
 
 " Ack
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 
 " Ag
 Plug 'rking/ag.vim'
@@ -22,7 +22,7 @@ Plug 'rking/ag.vim'
 Plug 'itchyny/lightline.vim'
 
 " Git Gutter
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 
 " Comment things out with commentary
 Plug 'tpope/vim-commentary'
@@ -34,13 +34,13 @@ Plug 'tpope/vim-repeat'
 Plug 'flazz/vim-colorschemes'
 
 " Syntax checking
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Inserting closing brackets etc
 Plug 'Raimondi/delimitMate'
 
 " NerdTree
-Plug 'preservim/nerdtree'
+" Plug 'preservim/nerdtree'
 " Plug 'scrooloose/nerdtree'
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
@@ -51,13 +51,13 @@ Plug 'preservim/nerdtree'
 " 'scrooloose/nerdtree' -> 'preservim/nerdtree'
 
 " Surround Vim
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 
 " Commenting out Code
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
 
 " Search Highlighting
-Plug 'inside/vim-search-pulse'
+" Plug 'inside/vim-search-pulse'
 
 " Vertical indent lines
 " Plugin 'yggdroot/indentline'
@@ -69,7 +69,7 @@ Plug 'bling/vim-bufferline'
 Plug 'moll/vim-bbye'
 
 " Close all other buffers
-Plug 'schickling/vim-bufonly'
+" Plug 'schickling/vim-bufonly'
 
 " Use tag file to display current file structure
 " Plugin 'majutsushi/tagbar'
@@ -79,13 +79,13 @@ Plug 'schickling/vim-bufonly'
 " Plugin 'xolox/vim-easytags'
 
 " Coloured brackets
-Plug 'luochen1990/rainbow'
+" Plug 'luochen1990/rainbow'
 
 " Easy motion
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
 
 " Prettier - javascript code formatter
-Plug 'prettier/vim-prettier'
+" Plug 'prettier/vim-prettier'
 
 " CoC https://github.com/neoclide/coc.nvim
 Plug 'neoclide/coc.nvim'
@@ -128,41 +128,41 @@ autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype php setlocal ts=4 sw=4 sts=0 expandtab
 
 " CtrlP
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$|node_modules',
-  \ }
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]\.(git|hg|svn)$|node_modules',
+"   \ }
 
 " ALE
-let g:ale_pattern_options = {
-\   '.*\.test\.js$': {'ale_enabled': 0},
-\}
-let g:ale_fixers = { 'javascript': ['eslint'], 'go': ['gofmt'] }
+" let g:ale_pattern_options = {
+" \   '.*\.test\.js$': {'ale_enabled': 0},
+" \}
+" let g:ale_fixers = { 'javascript': ['eslint'], 'go': ['gofmt'] }
 
 " Coloured Brackets
-let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+" let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
-let g:rainbow_conf = {
-\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-\	'ctermfgs': ['darkblue', 'darkyellow', 'darkcyan', 'darkmagenta'],
-\	'operators': '_,_',
-\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-\	'separately': {
-\		'*': {},
-\		'tex': {
-\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-\		},
-\		'lisp': {
-\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-\		},
-\		'vim': {
-\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-\		},
-\		'html': {
-\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-\		},
-\		'css': 0,
-\	}
-\}
+" let g:rainbow_conf = {
+" \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+" \	'ctermfgs': ['darkblue', 'darkyellow', 'darkcyan', 'darkmagenta'],
+" \	'operators': '_,_',
+" \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+" \	'separately': {
+" \		'*': {},
+" \		'tex': {
+" \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+" \		},
+" \		'lisp': {
+" \			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+" \		},
+" \		'vim': {
+" \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+" \		},
+" \		'html': {
+" \			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+" \		},
+" \		'css': 0,
+" \	}
+" \}
 
 " LightLine
 set laststatus=2
@@ -204,29 +204,29 @@ function! LightlineLinterOK() abort
 endfunction
 
 " Update and show lightline but only if it's visible (e.g., not in Goyo)
-autocmd User ALELint call s:MaybeUpdateLightline()
-function! s:MaybeUpdateLightline()
-  if exists('#lightline')
-    call lightline#update()
-  end
-endfunction
+" autocmd User ALELint call s:MaybeUpdateLightline()
+" function! s:MaybeUpdateLightline()
+"   if exists('#lightline')
+"     call lightline#update()
+"   end
+" endfunction
 
 " Indentline
 let g:indentLine_conceallevel = 1
 
 " NERDTree
-let NERDTreeQuitOnOpen = 0
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+" let NERDTreeQuitOnOpen = 0
+" let NERDTreeMinimalUI = 1
+" let NERDTreeDirArrows = 1
 " Following two lines open NerdTree on startup if no file specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | wincmd p | ene | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | wincmd p | ene | endif
 
 "
 " Easy Motion
 "
 
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
@@ -234,14 +234,14 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " or
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-overwin-f2)
+" nmap s <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
+" let g:EasyMotion_smartcase = 1
 
 " JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
 
 "
 " Key Mappings
@@ -249,12 +249,12 @@ map <Leader>k <Plug>(easymotion-k)
 
 map <C-A> <C-W>
 
-nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>p :CtrlP<CR>
-nmap <leader>b :CtrlPBuffer<CR>
-nmap <leader>c :cclose<CR>
-nmap <leader>q :Bdelete<CR>
+" nmap <leader>n :NERDTreeToggle<CR>
+" nmap <leader>f :NERDTreeFind<CR>
+" nmap <leader>p :CtrlP<CR>
+" nmap <leader>b :CtrlPBuffer<CR>
+" nmap <leader>c :cclose<CR>
+" nmap <leader>q :Bdelete<CR>
 " nnoremap <leader>xa :BufOnly<CR>
 " nmap <F8> :TagbarToggle<CR>
 " nmap <leader>i :IndentLinesToggle<CR>:set invnumber<CR>
@@ -319,8 +319,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>F  <Plug>(coc-format-selected)
-nmap <leader>F  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -387,3 +387,52 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+
+" CoC Explorer
+" let g:coc_explorer_global_presets = {
+" \   '.vim': {
+" \     'root-uri': '~/.vim',
+" \   },
+" \   'floating': {
+" \     'position': 'floating',
+" \     'open-action-strategy': 'sourceWindow',
+" \   },
+" \   'floatingTop': {
+" \     'position': 'floating',
+" \     'floating-position': 'center-top',
+" \     'open-action-strategy': 'sourceWindow',
+" \   },
+" \   'floatingLeftside': {
+" \     'position': 'floating',
+" \     'floating-position': 'left-center',
+" \     'floating-width': 50,
+" \     'open-action-strategy': 'sourceWindow',
+" \   },
+" \   'floatingRightside': {
+" \     'position': 'floating',
+" \     'floating-position': 'right-center',
+" \     'floating-width': 50,
+" \     'open-action-strategy': 'sourceWindow',
+" \   },
+" \   'simplify': {
+" \     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+" \   }
+" \ }
+
+"{
+"  "<cr>": ["expandable?", "expandOrCollapse", "open"]
+"}
+
+" Use preset argument to open it
+" nmap <leader>e :CocCommand explorer --preset .vim<CR>
+nmap <leader>e :CocCommand explorer<CR>
+" nmap <space>ed :CocCommand explorer --preset .vim<CR>
+" nmap <space>ef :CocCommand explorer --preset floating<CR>
+
+" List all presets
+" nmap <space>el :CocList explPresets
+
+" :call CocAction('runCommand', 'explorer.doAction', 0, ['expandable?', 'expand', 'open'])
+" :call CocAction('runCommand', 'explorer.doAction', 0, ['nodeNext'], [5])
+" :call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal'], [['relative', 0, 'file']])
