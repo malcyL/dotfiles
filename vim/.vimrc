@@ -139,6 +139,7 @@ map <C-A> <C-W>
 nmap <leader>p :CtrlP<CR>
 nmap <leader>c :cclose<CR>
 nmap <leader>q :Bdelete<CR>
+nnoremap <bs> <c-^>
 
 " Coc Configuration
 
