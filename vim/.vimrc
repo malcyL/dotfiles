@@ -137,6 +137,7 @@ let g:indentLine_conceallevel = 1
 map <C-A> <C-W>
 
 nmap <leader>p :CtrlP<CR>
+nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>c :cclose<CR>
 nmap <leader>q :Bdelete<CR>
 nnoremap <bs> <c-^>
