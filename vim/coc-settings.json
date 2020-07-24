@@ -2,9 +2,10 @@
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": false,
   "explorer.previewAction.onHover": false,
+  "explorer.openAction.for.directory": "none",
   "explorer.keyMappings": {
-    "o": ["open"],
-    "<cr>": ["expanded?", "collapse", "expand"],
+    "<cr>": ["expanded?", "collapse", "expand", "open"],
+    "-": "open:split",
     "v": "open:vsplit"
   }
 }
