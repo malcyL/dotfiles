@@ -12,6 +12,10 @@ call plug#begin('~/.vim/plugged')
 " CtrlP
 Plug 'kien/ctrlp.vim'
 
+" fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " Ag
 Plug 'rking/ag.vim'
 
@@ -136,14 +140,23 @@ let g:indentLine_conceallevel = 1
 
 map <C-A> <C-W>
 
-nmap <leader>p :CtrlP<CR>
+" nmap <leader>p :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 nmap <leader>c :cclose<CR>
 nmap <leader>q :Bdelete<CR>
 nnoremap <bs> <c-^>
 
-" Coc Configuration
+" stop highlighting a search
+nnoremap <leader><space> :nohlsearch<CR>
 
+" FZF
+nnoremap <leader>p :GFiles<CR>
+" nnoremap <leader>pf :Files<CR>
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'
+
+" Coc Configuration
+"
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
