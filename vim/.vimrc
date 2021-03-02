@@ -50,6 +50,12 @@ Plug 'moll/vim-bbye'
 " CoC https://github.com/neoclide/coc.nvim
 Plug 'neoclide/coc.nvim'
 
+" Git Messenger https://github.com/rhysd/git-messenger.vim
+Plug 'rhysd/git-messenger.vim'
+
+" goloang plugin
+Plug 'fatih/vim-go'
+
 " Initialize plugin system
 call plug#end()
 
@@ -230,6 +236,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <Leader>gm <Plug>(git-messenger)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -313,3 +320,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Use preset argument to open it
 nmap <leader>e :CocCommand explorer<CR>
+
+" Set colours for paren matching
+hi MatchParen ctermfg=yellow ctermbg=black

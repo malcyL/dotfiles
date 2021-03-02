@@ -8,5 +8,16 @@
     "<cr>": ["expanded?", "collapse", "expand", "open"],
     "-": "open:split",
     "v": "open:vsplit"
-  }
+  },
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "gocodeCompletionEnabled": true,
+        "diagnosticsEnabled": true,
+        "lintTool": "golint"
+      }
+    }
+  },
 }
