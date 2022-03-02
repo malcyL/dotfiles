@@ -56,6 +56,13 @@ Plug 'rhysd/git-messenger.vim'
 " goloang plugin
 Plug 'fatih/vim-go'
 
+" For JSX
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+" For tsx highlighting
+Plug 'HerringtonDarkholme/yats.vim'
+" or Plug 'leafgarland/typescript-vim'
+
 " Initialize plugin system
 call plug#end()
 
