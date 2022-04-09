@@ -63,6 +63,9 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'HerringtonDarkholme/yats.vim'
 " or Plug 'leafgarland/typescript-vim'
 
+" Highlightinh selections
+Plug 'markonm/traces.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -74,7 +77,7 @@ syntax enable " Turn on syntax highlighting
 
 set hidden " Leave hidden buffers open
 set history=100 "by default Vim saves your last 8 commands.  We can handle more
-set number relativenumber
+set number " relativenumber " commented out relative line numbering
 set clipboard=unnamedplus
 :au FocusLost * silent! wa
 :set autowriteall
