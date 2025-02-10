@@ -7,7 +7,12 @@ set viminfo='100,n$HOME/.vim/files/info/viminfo
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+" call plug#begin('~/.vim/plugged')
+" call plug#begin('/home/ml/.local/share/nvim/site/autoload/plug.vim')
+call plug#begin('/home/ml/.vim/autoload/plug.vim')
+"                ./.local/share/nvim/site/autoload/plug.vim
+"                ./.vim/autoload/plug.vim
+
 
 " CtrlP
 Plug 'kien/ctrlp.vim'
@@ -355,3 +360,5 @@ nmap <leader>e :CocCommand explorer<CR>
 
 " Set colours for paren matching
 hi MatchParen ctermfg=yellow ctermbg=black
+
+set mouse=
